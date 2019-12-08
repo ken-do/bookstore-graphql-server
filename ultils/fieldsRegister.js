@@ -1,45 +1,44 @@
-const axios = require('axios');
+const axios = require('axios')
 
 const {
-    GraphQLString,
-    GraphQLList
-} = require('graphql');
+  GraphQLString,
+  GraphQLList
+} = require('graphql')
 
-const registerSingleFields = (queryTypes) => {
-    const registeredTypes = {};
-    queryTypes.forEach(type => {
-        const fieldName = type.name.toLowerCase();
-        registeredTypes[fieldName] = {
-            type,
-            args: { id: { type: GraphQLString } },
-            resolve(parentValue, { id }) {
-                return axios.get(`${process.env.API_BOOKSTORE}/${fieldName}s/${id}`)
-                    .then(res => res.data)
-            }
-        }
-    });
+const registerSingleFields = queryTypes => {
+  const registeredTypes = {}
+  queryTypes.forEach(type => {
+    const fieldName = type.name.toLowerCase()
+    registeredTypes[fieldName] = {
+      type,
+      args: { id: { type: GraphQLString } },
+      resolve (parentValue, { id }) {
+        return axios.get(`${process.env.API_BOOKSTORE}/${fieldName}s/${id}`)
+          .then(res => res.data)
+      }
+    }
+  })
 
-    return registeredTypes;
+  return registeredTypes
 }
 
-const registerListFields = (queryTypes) => {
-    const registeredTypes = {};
-    queryTypes.forEach(type => {
-        const fieldName = type.name.toLowerCase() + 's';
-        registeredTypes[fieldName] = {
-            type: new GraphQLList(type),
-            args: { id: { type: GraphQLString } },
-            resolve(parentValue, { id }) {
-                return axios.get(`${process.env.API_BOOKSTORE}/${fieldName}`)
-                    .then(res => res.data)
-            }
-        }
-    });
+const registerListFields = queryTypes => {
+  const registeredTypes = {}
+  queryTypes.forEach(type => {
+    const fieldName = type.name.toLowerCase() + 's'
+    registeredTypes[fieldName] = {
+      type: new GraphQLList(type),
+      resolve (parentValue, args) {
+        return axios.get(`${process.env.API_BOOKSTORE}/${fieldName}`)
+          .then(res => res.data)
+      }
+    }
+  })
 
-    return registeredTypes;
+  return registeredTypes
 }
 
 module.exports = {
-    registerSingleFields,
-    registerListFields
-};
+  registerSingleFields,
+  registerListFields
+}
