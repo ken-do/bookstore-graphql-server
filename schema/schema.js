@@ -21,6 +21,11 @@ const {
   registerFieldsRemover
 } = require('../ultils/mutationsRegister')
 
+const {
+  login,
+  logout
+} = require('./mutations')
+
 const RootQuery = new GraphQLObjectType({
   name: 'RootQueryType',
   fields: {
@@ -59,7 +64,9 @@ const Mutation = new GraphQLObjectType({
       AuthorType,
       PublisherType,
       BookType
-    ])
+    ]),
+    login,
+    logout
   }
 })
 
