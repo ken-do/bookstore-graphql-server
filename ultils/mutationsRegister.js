@@ -2,6 +2,7 @@ const axios = require('axios')
 
 const {
   GraphQLString,
+  GraphQLID,
   GraphQLNonNull
 } = require('graphql')
 
@@ -48,7 +49,7 @@ const registerFieldsRemover = queryTypes => {
     const fieldName = type.name
     registeredMutations[`delete${fieldName}`] = {
       type,
-      args: { id: { type: new GraphQLNonNull(GraphQLString) } },
+      args: { id: { type: new GraphQLNonNull(GraphQLID) } },
       resolve (parentValue, { id }) {
         return axios.delete(`${process.env.API_BOOKSTORE}/${fieldName.toLowerCase()}s/${id}/`)
           .then(res => res.data)
