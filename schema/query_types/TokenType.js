@@ -1,15 +1,10 @@
-const graphQL = require('graphql')
+const { GraphQLObjectType } = require('graphql')
 
-const {
-  GraphQLObjectType,
-  GraphQLString
-} = graphQL
+const fields = require('../fields/tokenFields')
 
 const TokenType = new GraphQLObjectType({
-  name: 'TokenType',
-  fields: {
-    token: { type: GraphQLString }
-  }
+  name: 'Token',
+  fields
 })
 
 module.exports = TokenType
