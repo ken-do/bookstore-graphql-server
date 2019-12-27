@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon server.js",
-    "standard": "standard --fix"
+    "fix": "standard --fix"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "graphql": "^14.5.8"
   },
   "devDependencies": {
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "standard": "^14.3.1"
   }
 }
