@@ -10,7 +10,8 @@ const registerFieldsAdder = queryTypes => {
   queryTypes.forEach(type => {
     const fieldName = type.name
     const loweredFieldName = fieldName.toLowerCase()
-    const args = require(`../schema/fields/${loweredFieldName}Fields`)
+    const typeFields = require(`../schema/fields/${loweredFieldName}Fields`)
+    const args = { ...typeFields }
     delete args.id
     registeredMutations[`add${fieldName}`] = {
       type,
