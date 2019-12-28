@@ -2,14 +2,16 @@ require('dotenv').config()
 
 const express = require('express')
 const expressGraphQL = require('express-graphql')
+const cors = require('cors')
 
 const RootQuery = require('./schema/schema')
 
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('Bookstore GraphQL Server')
-})
+app.use(cors({
+  origin: 'http://localhost:3000',
+  optionsSuccessStatus: 200
+}))
 
 app.use('/graphql', expressGraphQL({
   graphiql: true,
