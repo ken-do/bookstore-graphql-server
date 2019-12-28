@@ -5,13 +5,13 @@ module.exports = {
     return axios.post(`${process.env.API_BOOKSTORE}/api-token-auth/`, args)
       .then(res => {
         axios.defaults.headers.common.Authorization = 'Token ' + res.data.token
-        return res.data
+        return { isAuthenticated: true }
       })
       .catch(err => console.log(err))
   },
 
   logout: () => {
     delete axios.defaults.headers.common.Authorization
-    return ''
+    return { isAuthenticated: false }
   }
 }

@@ -2,10 +2,10 @@ const {
   logout
 } = require('../../ultils/Auth')
 
-const TokenType = require('../query_types/TokenType')
+const AuthType = require('../query_types/AuthType')
 
 module.exports = {
-  type: TokenType,
+  type: AuthType,
   resolve (parentValue, args) {
     return logout()
   }
